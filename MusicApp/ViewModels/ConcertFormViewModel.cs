@@ -16,7 +16,7 @@ namespace MusicApp.ViewModels
 
         public DateTime DateTime
         {
-            get { return DateTime.Parse(string.Format("{0}{1}", Date, Time)); }
+            get { return DateTime.Parse(string.Format("{0} {1}", Date, Time)); }
         }
     }
 }
