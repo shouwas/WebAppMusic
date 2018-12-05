@@ -25,7 +25,7 @@ namespace MusicApp.Controllers
         {
             var ViewModel = new ConcertFormViewModel
             {
-                Genres = _Context.Genre.ToList()
+                Genres = _Context.Genre.ToList(),
             };
 
             return View(ViewModel);
@@ -35,11 +35,16 @@ namespace MusicApp.Controllers
         [HttpPost]
         public ActionResult Create(ConcertFormViewModel viewModel)
         {
-
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = _Context.Genre.ToList();
+                return View("Create", viewModel);
+            }
+                
             var concert = new Concert
             {
                 ArtistId = User.Identity.GetUserId(),
-                DateTime = viewModel.DateTime,
+                DateTime = viewModel.GetDateTime(),
                 GenreId = viewModel.Genre,
                 Venue = viewModel.Venue
             };
