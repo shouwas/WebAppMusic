@@ -217,6 +217,10 @@
     <Compile Include="Migrations\201812031810096_PopulateGenresTable.Designer.cs">
       <DependentUpon>201812031810096_PopulateGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812050049368_AddForeignKeyPorpertiesToConcert.cs" />
+    <Compile Include="Migrations\201812050049368_AddForeignKeyPorpertiesToConcert.Designer.cs">
+      <DependentUpon>201812050049368_AddForeignKeyPorpertiesToConcert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -291,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -317,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812031810096_PopulateGenresTable.resx">
       <DependentUpon>201812031810096_PopulateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812050049368_AddForeignKeyPorpertiesToConcert.resx">
+      <DependentUpon>201812050049368_AddForeignKeyPorpertiesToConcert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
