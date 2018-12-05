@@ -231,6 +231,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ConcertFormViewModel.cs" />
+    <Compile Include="ViewModels\FuturDate.cs" />
+    <Compile Include="ViewModels\ValidationTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
