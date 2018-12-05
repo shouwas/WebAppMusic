@@ -17,5 +17,4 @@ namespace MusicApp.ViewModels
             return (isValid);
         }
     }
-
 }
