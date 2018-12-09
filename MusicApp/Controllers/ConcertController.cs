@@ -33,6 +33,7 @@ namespace MusicApp.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(ConcertFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
