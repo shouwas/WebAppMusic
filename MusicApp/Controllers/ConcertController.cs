@@ -40,7 +40,7 @@ namespace MusicApp.Controllers
                 viewModel.Genres = _Context.Genre.ToList();
                 return View("Create", viewModel);
             }
-                
+
             var concert = new Concert
             {
                 ArtistId = User.Identity.GetUserId(),

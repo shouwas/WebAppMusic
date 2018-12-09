@@ -13,15 +13,17 @@ namespace MusicApp.ViewModels
         public string Venue { get; set; }
 
         [Required]
+ //       [FuturDate]
         public string Date { get; set; }
 
         [Required]
+        [ValidationTime]
         public string Time { get; set; }
 
         [Required]
         public byte Genre { get; set; }
 
-        [Required]
+        
         public IEnumerable<Genre> Genres { get; set; }
 
         public DateTime GetDateTime()
