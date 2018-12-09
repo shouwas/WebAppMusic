@@ -16,7 +16,6 @@ namespace MusicApp.ViewModels
         public string Date { get; set; }
 
         [Required]
-        [ValidationTime]
         public string Time { get; set; }
 
         [Required]
