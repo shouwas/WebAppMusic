@@ -1,16 +1,28 @@
-﻿using System;
+﻿using MusicApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace MusicApp.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext _context;
+
+        public HomeController()
+        {
+            _context = new ApplicationDbContext();
+        }
         public ActionResult Index()
         {
-            return View();
+            var upcomingConcert = _context.Concerts
+                .Include(g => g.Artist)
+                .Where(g => g.DateTime > DateTime.Now);
+            return View(upcomingConcert);
         }
 
         public ActionResult About()
