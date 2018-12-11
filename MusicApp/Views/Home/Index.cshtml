@@ -1,28 +1,16 @@
-﻿@{
+﻿@model IEnumerable<MusicApp.Models.Concert>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    <div class="row">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-10">
-            <div class="well">
-                <h1>AppMusic</h1>
-                <p class="lead">L'application est un mini réseau social qui permet aux mélomanes de suivre facilement les concerts de leurs artistes préférés.</p>
-            </div>
-            <div class="col-sm-1">
-            </div>
-        </div>
-    </div>
+   
+    <ul>
+        @foreach (var c in Model ) {
 
-    <div class="row">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-10">
-            <img src="~/images/concert.jpg" alt="concert" style=" max-width:100%;" />
-        </div>
-        <div class="col-sm-1">
-        </div>
-    </div>
+            <li>@c.DateTime.ToString() <span>........</span>@c.Artist.Name</li>
+        }
+    </ul>
+
 </div>
