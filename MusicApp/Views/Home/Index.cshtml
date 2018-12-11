@@ -4,13 +4,22 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-   
-    <ul>
-        @foreach (var c in Model ) {
 
-            <li>@c.DateTime.ToString() <span>........</span>@c.Artist.Name</li>
+<div class="container">
+    <!-- Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Artiste</th>
+            </tr>
+        </thead>
+        @foreach (var c in Model)
+        {
+        <tr>
+            <td>@c.DateTime</td>
+            <td>@c.Artist.Name</td>
+        </tr>
         }
-    </ul>
-
+    </table>
 </div>

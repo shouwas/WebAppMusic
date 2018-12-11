@@ -66,6 +66,7 @@ namespace MusicApp.Models
     {
         [Required]
         [StringLength(100)]
+        [Display(Name = "Nom")]
         public string Name { get; set; }
 
         [Required]
