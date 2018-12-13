@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using MusicApp.ViewModels;
 
 namespace MusicApp.Controllers
 {
@@ -21,8 +22,16 @@ namespace MusicApp.Controllers
         {
             var upcomingConcert = _context.Concerts
                 .Include(g => g.Artist)
+                .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now);
-            return View(upcomingConcert);
+
+            var viewModel = new HomeViewModel
+            {
+                UpcomingConcerts = upcomingConcert,
+                ShowActions = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()
@@ -39,4 +48,5 @@ namespace MusicApp.Controllers
             return View();
         }
     }
+
 }

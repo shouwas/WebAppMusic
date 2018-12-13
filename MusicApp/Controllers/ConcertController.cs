@@ -3,6 +3,7 @@ using MusicApp.Models;
 using MusicApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +18,25 @@ namespace MusicApp.Controllers
         public ConcertController()
         {
             _Context = new ApplicationDbContext();
+        }
+
+        public ActionResult Attending()
+        {
+            var userId = User.Identity.GetUserId();
+            var concerts = _Context.Attendances
+                .Where(a => a.AttendeeId == userId)
+                .Select(a => a.Concert)
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
+                .ToList();
+
+            var viewModel = new HomeViewModel()
+            {
+                UpcomingConcerts = concerts,
+                ShowActions = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
         }
 
         // GET: Concert

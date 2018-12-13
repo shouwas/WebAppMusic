@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MusicApp.Models.Concert>
+﻿@model MusicApp.ViewModels.HomeViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -12,15 +12,31 @@
             <tr>
                 <th>Date</th>
                 <th>Artiste</th>
+                <th>Suivants</th>
                 <th>Action</th>
             </tr>
         </thead>
-        @foreach (var c in Model)
+
+        @foreach (var c in Model.UpcomingConcerts)
         {
         <tr>
             <td>@c.DateTime</td>
             <td>@c.Artist.Name</td>
-            <td><button data-concert-id="@c.Id" class="btn btn-default btn-sm js-toggle-attendance" >Allez-y ?</button></td>
+            <td>
+            @if (Model.ShowActions)
+
+            {
+               <button data-user-id="@c.ArtistId" class="btn btn-link btn-sm js-toggle-follow">Suivants</button>
+            }
+            </td>
+
+            <td>
+             @if (Model.ShowActions)
+
+              {
+                    <button data-concert-id="@c.Id" class="btn btn-default btn-sm js-toggle-attendance">Allez-y ?</button>
+              }
+             </td>
         </tr>
         }
     </table>
@@ -30,15 +46,27 @@
 {
     <script>
         $(document).ready(function () {
-            $(".js-toggle-attendanc").click(function (e) {
-                $.post("/api/attendances", { "": $(e.target).attr("data-concert-id")})
+            $(".js-toggle-attendance").click(function (e) {
+                $.post("/api/attendances", { concertId: $(e.target).attr("data-concert-id")})
                     .done(function () {
-                        $(e.target).removeClass("btn-default").addClass("btn-default").text("Reservé")
+                        $(e.target).removeClass("btn-default").addClass("btn-primary").text("Reservé")
                     })
-                    .fail(function(){
+                    .fail(function() {
                         alert("Something failed");
                     });
             });
+
+
+            $(".js-toggle-follow").click(function (e) {
+                $.post("/api/followings", { followeeId: $(e.target).attr("data-concert-id") })
+                    .done(function () {
+                        $(e.target).text("Following")
+                    })
+                    .fail(function () {
+                        alert("Something failed");
+                    });
+            });
+
         });
     </script>
 

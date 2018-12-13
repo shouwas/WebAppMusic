@@ -1,0 +1,45 @@
+﻿@model MusicApp.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Attending</h2>
+
+
+<div class="container">
+    <!-- Table -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Artiste</th>
+                <th>Suivants</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        @foreach (var c in Model.UpcomingConcerts)
+        {
+            <tr>
+                <td>@c.DateTime</td>
+                <td>@c.Artist.Name</td>
+                <td>
+                    @if (Model.ShowActions)
+
+                    {
+                        <button data-user-id="@c.ArtistId" class="btn btn-link btn-sm js-toggle-follow">Suivants</button>
+                    }
+                </td>
+
+                <td>
+                    @if (Model.ShowActions)
+
+                    {
+                        <button data-concert-id="@c.Id" class="btn btn-default btn-sm js-toggle-attendance">Allez-y ?</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

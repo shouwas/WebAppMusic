@@ -11,36 +11,34 @@ using System.Web.Http;
 namespace MusicApp.Controllers
 {
     [Authorize]
-    public class AttendancesController : ApiController
+    public class FollowingsController : ApiController
     {
         private ApplicationDbContext _Context;
 
-        public AttendancesController()
+        public FollowingsController()
         {
             _Context = new ApplicationDbContext();
         }
-
         [HttpPost]
-        public IHttpActionResult Attend(AttendanceDto dto)
+        public IHttpActionResult Follow(FollowingDto dto)
         {
             var userId = User.Identity.GetUserId();
-            var exists = _Context.Attendances.Any(a => a.AttendeeId == userId && a.ConcertId == dto.ConcertId);
+            var exists = _Context.Followings.Any(f => f.FolloweeId == userId && f.FolloweeId == dto.FollowerId);
 
-            if(exists)
+            if (exists)
             {
-                return BadRequest("The attendance already exists.");
+                return BadRequest("The following already exists.");
             }
 
-            var attendance = new Attendance
+            var following = new Following
             {
-                ConcertId = dto.ConcertId,
-                AttendeeId = userId
+                FollowerId = userId,
+                FolloweeId = dto.FolloweeId
             };
-            _Context.Attendances.Add(attendance);
+            _Context.Followings.Add(following);
             _Context.SaveChanges();
 
             return Ok();
-
         }
     }
 }
