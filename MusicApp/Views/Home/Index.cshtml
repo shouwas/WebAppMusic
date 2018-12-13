@@ -12,6 +12,7 @@
             <tr>
                 <th>Date</th>
                 <th>Artiste</th>
+                <th>Action</th>
             </tr>
         </thead>
         @foreach (var c in Model)
@@ -19,7 +20,26 @@
         <tr>
             <td>@c.DateTime</td>
             <td>@c.Artist.Name</td>
+            <td><button data-concert-id="@c.Id" class="btn btn-default btn-sm js-toggle-attendance" >Allez-y ?</button></td>
         </tr>
         }
     </table>
 </div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendanc").click(function (e) {
+                $.post("/api/attendances", { "": $(e.target).attr("data-concert-id")})
+                    .done(function () {
+                        $(e.target).removeClass("btn-default").addClass("btn-default").text("Reservé")
+                    })
+                    .fail(function(){
+                        alert("Something failed");
+                    });
+            });
+        });
+    </script>
+
+}
